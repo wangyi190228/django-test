@@ -1,0 +1,16 @@
+{% extends "template.html" %}
+
+<!-- change content -->
+{%block bodytag%}
+<body class="logout">
+{%endblock%}
+
+{%block header%}
+<p id="logoutapp"><strong>Logged out</strong></p>
+{%endblock%}
+
+{%block content%}
+<p class="logout-content">Thanks for using Admin systerm of AF Chengdu!</p>
+<br>
+<a class="logoutback" href="/login/">Log in again</a>
+{%endblock%}

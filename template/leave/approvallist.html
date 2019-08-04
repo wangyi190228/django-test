@@ -1,0 +1,30 @@
+{% extends "template.html" %}
+
+<!-- change content -->
+{%block bodytag%}
+<body class="approvallist">
+{%endblock%}
+
+{%block header%}
+<p class="approvallistapp">Approval list</p>
+{%endblock%}
+
+{%block content%}
+<table  class="approvallisttab">
+    <tr>
+        <th>Item</th>
+        <th>Start</th>
+        <th>Stop</th>
+        <th>Days</th>
+        <th>Status</th>
+    </tr>
+
+   <tr>
+       <td>{{item}}</td>
+       <td>{{start}}</td>
+       <td>{{stop}}</td>
+       <td>{{Daysnum}}</td>
+       <td>{{status}}</td>
+   </tr>
+</table>
+{%endblock%}

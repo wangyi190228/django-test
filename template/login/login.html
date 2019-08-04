@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+<head>
+    <title>AF site admin</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css"> 
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+<body class=" login" data-admin-utc-offset="28800">
+
+    <!-- Container -->
+    <div id="container">
+        <!-- Header -->
+        <div id="header">
+            <div id="branding">
+                <embed src="/static/img/af-logo.svg">
+                <h1 id="site-name">AF admin</h1>
+
+            </div>
+
+        </div>
+        <!-- END Header -->
+        <!-- Content -->
+        <div id="content" class="colM">
+
+            <div id="content-main">
+
+                <form action="index.html" method="post" id="login-form"><input type="hidden"
+                        name="csrfmiddlewaretoken"
+                        value="1WItEpaD1kmTsHYF7TY1yzc5AqKCSUdhhRXtWH3hks5dlJJ8qtRnuyNfq2DLnWg8">
+                        {% csrf_token %}
+                        <div class="form-row">
+
+                        <label class="required" for="id_username">Username:</label> <input type="text" name="username"
+                            autocomplete="username" autofocus autocapitalize="none" required id="id_username">
+                    </div>
+                    <div class="form-row">
+
+                        <label class="required" for="id_password">Password:</label> <input type="password"
+                            name="password" autocomplete="current-password" required id="id_password">
+                    </div>
+
+                    <div class="submit-row">
+                        <label>&nbsp;</label><input type="submit" value="Log in">
+                        <a id="signup" href="/register/">Sign up</a>
+                    </div>
+                </form>
+            </div>
+            <br class="clear">
+        </div>
+        <!-- END Content -->
+
+        <div id="footer">
+
+        </div>
+    </div>
+    <!-- END Container -->
+
+</body>
+
+</html>

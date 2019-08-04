@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {%block title%}
+    <title>AF site admin</title>
+    {%endblock%}
+    <link rel="stylesheet" type="text/css" href= "{% static 'css/afsty.css' %}">
+
+    <!-- <script src="/static/js/afsty.js"></script> -->
+</head>
+
+{%block bodytag%}
+<body class="template">
+{%endblock%}
+
+    <div id="container">
+        <div id="body-header">
+            <ul>
+                <embed src="/static/img/af-logo.svg">
+                <li><strong><a href="/login/">Admin systerm of AF Chengdu</a> </strong></li>
+                <li> <a href="/attend/">Attendance</a></li>
+                <li> <a href="/annual/">Annual leave</a></li>
+                <li> <a href="/work/">Working hours</a></li>
+                <li class="logtag"> <a href="/logout/">Logout</a></li>
+            </ul>
+        </div>
+        <!-- body-header end -->
+        <div id="body-content">
+            {%block header%}
+            <p class="template">template</p>
+            {%endblock%}
+            <hr>
+            <hr>
+            <br>
+            {%block content%}
+            <p>this is the template</p>
+            {%endblock%}
+        </div>
+        <br>
+        <br>                
+        <hr>
+        <hr>
+        <!-- body-content end -->
+        <div id="body-footer">
+            <footer>
+                <embed src="/static/img/af-logo-footer.svg">
+                <p><strong>Admin systerm of AF Chengdu</strong></p>
+            </footer>
+        </div>
+        <!-- body-footer end -->
+    </div>
+    <!-- container end -->
+</body>
+
+</html>

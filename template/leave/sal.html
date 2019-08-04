@@ -1,0 +1,41 @@
+{% extends "template.html" %}
+
+<!-- change content -->
+{%block bodytag%}
+<body class="sal">
+{%endblock%}
+
+{%block header%}
+<p class="annualapp">Second approval</p>
+{%endblock%}
+
+{%block content%}
+<form class="from-group" action="/approvallist/" method="POST">
+    {% csrf_token %}
+    Start: <input name="start" class="start" type="date" readonly>
+    <select name="alstart" class="alstart" disabled>
+        <option value="0">9:00</option>
+        <option value="1">13:00</option>
+    </select>
+    &nbsp&nbsp&nbsp&nbsp
+    Stop: <input name="stop" class="stop" type="date" readonly>
+    <select name="alstop" class="alstop" disabled>
+        <option value="0">17:30</option>
+        <option value="1">13:00</option>
+    </select>
+    &nbsp&nbsp&nbsp&nbsp
+    Days: <input name="Daysnum" id="numofday" type="text" readonly>
+    <p>Reason:</p>
+    <textarea cols="90" rows="6" readonly></textarea>
+    <p>First Apl:</p>
+    <textarea cols="90" rows="6" readonly></textarea>
+    <p>Approval:</p>
+    <textarea cols="90" rows="6" ></textarea>
+    <br>
+    <br>
+    <div class="subinfo">
+        <input name="agreesubmit" class="submit" type="submit" value="Agree">
+        <input name="denysubmit" type="submit" value="Deny">
+    </div>
+</form>
+{%endblock%}

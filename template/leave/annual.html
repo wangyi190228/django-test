@@ -1,0 +1,36 @@
+{% extends "template.html" %}
+
+<!-- change content -->
+{%block bodytag%}
+<script src="/static/js/afstl.js"></script>
+<body class="annual">
+{%endblock%}
+
+{%block header%}
+<p class="annualapp">Annual Application</p>
+{%endblock%}
+
+{%block content%}
+
+<form class="from-group" action="/annuallist/" method="POST">
+    {% csrf_token %} 
+    <label >Start: </label> <input name="start" id="startin" class="start" type="date" value=" " onchange="indate()">
+    <select name="alstart" id="alstartin" class="alstart" onchange="indate()">
+        <option value="0">9:00</option>
+        <option value="1">13:00</option>
+    </select>
+    &nbsp&nbsp&nbsp&nbsp
+    <label >Stop: </label> <input name="stop" id="stopin" class="stop" type="date" value=" " onchange="indate()">
+    <select name="alstop" id="alstopin" class="alstop" onchange="indate()">
+        <option value="0">17:30</option>
+        <option value="1">13:00</option>
+    </select>
+    &nbsp&nbsp&nbsp&nbsp
+    <label >Days: </label> <input name="Daysnum" id="numofday"  type="number" readonly>
+    <p>Reason:</p>
+    <textarea cols="90" rows="6"></textarea>
+    <br>
+    <br>
+    <input name="alsubmit" class="subapp" type="submit" value="submit">
+</form>
+{%endblock%}

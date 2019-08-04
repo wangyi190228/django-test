@@ -1,0 +1,44 @@
+{% extends "template.html" %}
+
+<!-- change content -->
+{%block bodytag%}
+<body class="fimport">
+{%endblock%}
+
+{%block header%}
+<p class="fimporttapp">Annual list</p>
+{%endblock%}
+
+{%block content%}
+    
+<table class="annualtab">
+    <!-- table header -->
+    <tr>
+        <th>Item</th>
+        <th>Start</th>
+        <th>Stop</th>
+        <th>Days</th>
+        <th>Status</th>
+        <th>Other</th>
+    </tr>
+   <!-- table header end -->
+<!-- table body -->
+
+   {% comment %}
+     {% if  %}
+   {% endcomment %}
+    <tr>
+        <td>{{item}}</td>
+        <td>{{start}}</td>
+        <td>{{stop}}</td>
+        <td>{{Daysnum}}</td>
+        <td>{{status}}</td>
+        <td><a href="#">detail</a></td>
+    </tr>
+    {% comment %}
+      {% endif %}
+    {% endcomment %}
+
+<!-- table body end -->
+</table>
+{%endblock%}
