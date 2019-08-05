@@ -10,25 +10,40 @@
 {%endblock%}
 
 {%block content%}  
-<form action="" method="POST" enctype="multipart/form-data">
+<form id="fileimport" action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    <input name="uploadfile" type="file" id="files" required/>
+    {{form}}
     <input name="fsubmit" type="submit" id="import" value="import"/>
 </form>
 
-<br><br>
-<hr>
-<table class="attendtab">
-    <tr>
-        <th>Name</th>
-        <th>Number</th>       
-        <th>SignIn</th>
-        <th>SignBack</th>
-        <th>Date</th>
-        <th>MachineName</th>       
-        <th>Status</th>
-        <th>Type</th>
-    </tr>
 
-</table>
+
+    {% comment %} {{test}} {% endcomment %}
+  <table>
+      <th>time</th>
+      <th>afnumofperson</th>
+      <th>name</th>
+      <th>cardnum</th>
+      <th>machinename</th>
+      <th>event place</th>
+      <th>verify method</th>
+      <th>status</th>
+      <th>thing type</th>
+      <th>backup</th>
+      {% for index in attendlist %}
+      <tr>{{index}}</tr>
+      <tr>{{afnumofperson}}</tr>
+      <tr>{{name}}</tr>
+      <tr>{{cardnum}}</tr>
+      <tr>{{machinename}}</tr>
+      <tr>{{event_place}}</tr>
+      <tr>{{verify_method}}</tr>
+      <tr>{{status}}</tr>
+      <tr>{{thing_type}}</tr>
+      <tr>{{backup}}</tr> 
+      {% endfor %}
+  </table>
+
+
+
 {%endblock%}

@@ -164,9 +164,13 @@ hr
     background-color: grey;
 }
 
-#files{
-    margin-left: 20px;
+#id_file{
+    margin-left: 10px;
     width: 250px;
     background-color: antiquewhite;
+}
+
+#fileimport{
+    margin-left: 100px;
 }
 
