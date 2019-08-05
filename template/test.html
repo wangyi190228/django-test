@@ -15,11 +15,11 @@
     {{form}}
     <input name="fsubmit" type="submit" id="import" value="import"/>
 </form>
-
-
-
-    {% comment %} {{test}} {% endcomment %}
-  <table>
+<hr>
+  <table class="attendtab">
+      <tr>
+      <th>Item</th>
+      <th>date</th>
       <th>time</th>
       <th>afnumofperson</th>
       <th>name</th>
@@ -30,17 +30,31 @@
       <th>status</th>
       <th>thing type</th>
       <th>backup</th>
-      {% for index in attendlist %}
-      <tr>{{index}}</tr>
-      <tr>{{afnumofperson}}</tr>
-      <tr>{{name}}</tr>
-      <tr>{{cardnum}}</tr>
-      <tr>{{machinename}}</tr>
-      <tr>{{event_place}}</tr>
-      <tr>{{verify_method}}</tr>
-      <tr>{{status}}</tr>
-      <tr>{{thing_type}}</tr>
-      <tr>{{backup}}</tr> 
+    </tr>
+      {% for date,time,afnumofperson,name,cardnum,machinename,event_place,verify_method,status,thing_type,backup in attendlist %}
+      <tr>
+      <td>{{forloop.counter}}</td>
+      <td>{{date}}</td>
+      <td>{{time}}</td>
+      <!-- &nbsp&nbsp -->
+      <td>{{afnumofperson}}</td>
+      <!-- &nbsp&nbsp -->
+      <td>{{name}}</td>
+      <!-- &nbsp&nbsp -->
+      <td>{{cardnum}}</td>
+      <!-- &nbsp&nbsp -->
+      <td>{{machinename}}</td>
+      <!-- &nbsp&nbsp -->
+      <td>{{event_place}}</td>
+      <!-- &nbsp&nbsp -->
+      <td>{{verify_method}}</td>
+      <!-- &nbsp&nbsp -->
+      <td>{{status}}</td>
+      <!-- &nbsp&nbsp -->
+      <td>{{thing_type}}</td>
+      <!-- &nbsp&nbsp -->
+      <td>{{backup}}</td> 
+      </tr>
       {% endfor %}
   </table>
 
