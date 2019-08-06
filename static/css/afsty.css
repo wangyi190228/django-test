@@ -164,8 +164,8 @@ hr
     background-color: grey;
 }
 
-#files{
-    margin-left: 20px;
+#id_file{
+    margin-left: 5px;
     width: 250px;
     background-color: antiquewhite;
 }

@@ -10,5 +10,15 @@
 {%endblock%}
 
 {%block content%}
-<p id="attendapp"><strong>This is the Attendence page</strong></p>
+<!-- <p id="attendapp"><strong>This is the Attendence page</strong></p> -->
+<form  action="/attend/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }} 
+    <input name="formname" type="submit" value="Submit">
+</form>
+{{test}}
 {%endblock%} 
+
+
+
+

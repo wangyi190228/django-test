@@ -1,5 +1,6 @@
 from django.shortcuts import render
 # my code region
+from django.http import HttpResponseRedirect
 from .forms import UploadFileForm
 
 # Create your views here.
@@ -15,33 +16,27 @@ from .forms import UploadFileForm
 
 # def excel_upload(request):
 def attend(request):
-    '''
-    :param request:
-    :return: 上传文件excel表格 ,并进行解析
-    '''
-    if request.method == "POST":
- 
-        f = request.FILES['my_file']
-        type_excel = f.name.split('.')[1]
-        if 'xlsx' == type_excel:
-            # 开始解析上传的excel表格
-            wb = xlrd.open_workbook(filename=None, file_contents=f.read())  # 关键点在于这里
-            table = wb.sheets()[0]
-            nrows = table.nrows  # 行数
-            # ncole = table.ncols  # 列数
-            try:
-                with transaction.atomic():
-                    for i in range(1, nrows):
-                        # if 4 == i:
-                        #     i/0
-                        rowValues = table.row_values(i)  # 一行的数据
-                        good = models.GoodsManage.objects.get(international_code=rowValues[0])
-                        models.SupplierGoodsManage.objects.create(goods=good, sale_price=rowValues[1],sale_min_count = rowValues[2])
-            except Exception as e:
-                return JsonResponse({'msg':'出现错误....'})
- 
-            return JsonResponse({'msg':'ok'})
- 
-        return JsonResponse({'msg':'上传文件格式不是xlsx'})
- 
-    return JsonResponse({'msg':'不是post请求'})
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        # if form.is_valid():
+        content = {'test': request.FILES['file']}
+            # return HttpResponseRedirect('/attend/')
+        return render(request, 'attend/attendence.html',content)
+    else:
+        form = UploadFileForm()
+    # return render(request, 'attend/attendence.html', {'form': form})
+    return render(request, 'attend/attendence.html', {'form': form})
+    # return render(request, 'attend/attendence.html')
+
+
+def handle_uploaded_file(f):
+    with open('numtest.xls', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
+
+
+
+
+
+        

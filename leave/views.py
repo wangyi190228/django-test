@@ -19,7 +19,7 @@ def annuallist(request):
         if  start == '' or stop == '' or day == '0':
             return redirect('/annual/')
         else:
-            request.META['CSRF_COOKIE'] = rotate_token()
+
             send_mail(
                 'Remind',
                 'You have a new message',
