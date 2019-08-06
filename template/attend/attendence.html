@@ -2,23 +2,67 @@
 
 <!-- change content -->
 {%block bodytag%}
-<body class="attend">
+<body class="fimport">
 {%endblock%}
 
 {%block header%}
-<p class="attendapp">Attend</p>
+<p class="fimporttapp">File import</p>
 {%endblock%}
 
-{%block content%}
-<!-- <p id="attendapp"><strong>This is the Attendence page</strong></p> -->
-<form  action="/attend/" method="post" enctype="multipart/form-data">
+{%block content%}  
+<form id="fileimport" action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form }} 
-    <input name="formname" type="submit" value="Submit">
-</form>
-{{test}}
-{%endblock%} 
+    {{form}}
+    <input name="imsubmit" type="submit" id="import" value="import"/>
+  </form>
+  
+  <form action="">
+    <input name="exsubmit" type="submit" id="export" value="export">
+  </form>
+<!-- <button >export</button> -->
 
-
-
-
+<hr>
+  <table class="attendtab">
+      <tr>
+      <th>Item</th>
+      <th>date</th>
+      <th>ST</th>
+      <th>ET</th>
+      <th>afnumofperson</th>
+      <th>name</th>
+      <th>cardnum</th>
+      <th>machinename</th>
+      <th>event place</th>
+      <th>verify method</th>
+      <th>status</th>
+      <th>thing type</th>
+      <th>backup</th>
+    </tr>
+      {% for date,ST,ET,afnumofperson,name,cardnum,machinename,event_place,verify_method,status,thing_type,backup in attendlist %}
+      <tr>
+      <td>{{forloop.counter}}</td>
+      <td>{{date}}</td>
+      <td>{{ST}}</td>
+      <td>{{ET}}</td>
+      <!-- &nbsp&nbsp -->
+      <td>{{afnumofperson}}</td>
+      <!-- &nbsp&nbsp -->
+      <td>{{name}}</td>
+      <!-- &nbsp&nbsp -->
+      <td>{{cardnum}}</td>
+      <!-- &nbsp&nbsp -->
+      <td>{{machinename}}</td>
+      <!-- &nbsp&nbsp -->
+      <td>{{event_place}}</td>
+      <!-- &nbsp&nbsp -->
+      <td>{{verify_method}}</td>
+      <!-- &nbsp&nbsp -->
+      <td>{{status}}</td>
+      <!-- &nbsp&nbsp -->
+      <td>{{thing_type}}</td>
+      <!-- &nbsp&nbsp -->
+      <td>{{backup}}</td> 
+      </tr>
+      {% endfor %}
+  </table>
+{%endblock%}

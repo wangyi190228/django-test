@@ -186,3 +186,8 @@ hr
     border-collapse: collapse; 
 }
 
+#fileexport{
+    margin-left: 470px;
+    margin-top: -1.35em
+}
+
