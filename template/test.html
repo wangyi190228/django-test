@@ -15,12 +15,16 @@
     {{form}}
     <input name="fsubmit" type="submit" id="import" value="import"/>
 </form>
+
+<!-- <button >export</button> -->
+
 <hr>
   <table class="attendtab">
       <tr>
       <th>Item</th>
       <th>date</th>
-      <th>time</th>
+      <th>ST</th>
+      <th>ET</th>
       <th>afnumofperson</th>
       <th>name</th>
       <th>cardnum</th>
@@ -31,11 +35,12 @@
       <th>thing type</th>
       <th>backup</th>
     </tr>
-      {% for date,time,afnumofperson,name,cardnum,machinename,event_place,verify_method,status,thing_type,backup in attendlist %}
+      {% for date,ST,ET,afnumofperson,name,cardnum,machinename,event_place,verify_method,status,thing_type,backup in attendlist %}
       <tr>
       <td>{{forloop.counter}}</td>
       <td>{{date}}</td>
-      <td>{{time}}</td>
+      <td>{{ST}}</td>
+      <td>{{ET}}</td>
       <!-- &nbsp&nbsp -->
       <td>{{afnumofperson}}</td>
       <!-- &nbsp&nbsp -->
