@@ -4,6 +4,8 @@ from django.http import HttpResponseRedirect
 from .forms import UploadFileForm
 import xlrd,xlwt,datetime,os
 from django.http import FileResponse
+
+
 # my attend function
 def attend(request):
     attendlist = []
@@ -79,7 +81,7 @@ def attend(request):
                     worksheet.write(rindex,cindex, attendlist[rindex-1][cindex-1])
             # 保存
             workbook.save('attend.xls')
-            return render(request, 'test.html',{'attendlist':attendlist,'form': form})
+            return render(request, 'attend/attendence.html',{'attendlist':attendlist,'form': form})
     else:
         # download file
         if 'exsubmit' in request.GET:   
@@ -91,7 +93,7 @@ def attend(request):
         else:
 
             form = UploadFileForm()
-            return render(request, 'test.html',{'form': form})
+            return render(request, 'attend/attendence.html',{'form': form})
 
 
 

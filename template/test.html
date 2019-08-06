@@ -6,66 +6,47 @@
 {%endblock%}
 
 {%block header%}
-<p class="fimporttapp">File import</p>
+<nav class="navlist">
+  <ul>
+    <li>My Annual</li>
+    <li>Application record</li>
+    <li>Approval</li>
+    <li>Leave Application</li>
+  </ul>
+</nav>
+<p class="fimporttapp">Annual list</p>
 {%endblock%}
 
-{%block content%}  
-<form id="fileimport" action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{form}}
-    <input name="imsubmit" type="submit" id="import" value="import"/>
-  </form>
-  
-  <form id="fileexport" action="">
-    <input name="exsubmit" type="submit" id="export" value="export">
-  </form>
-<!-- <button >export</button> -->
-
-<hr>
-  <table class="attendtab">
-      <tr>
-      <th>Item</th>
-      <th>date</th>
-      <th>ST</th>
-      <th>ET</th>
-      <th>afnumofperson</th>
-      <th>name</th>
-      <th>cardnum</th>
-      <th>machinename</th>
-      <th>event place</th>
-      <th>verify method</th>
-      <th>status</th>
-      <th>thing type</th>
-      <th>backup</th>
+{%block content%}
+    
+<table class="annualtab">
+    <!-- table header -->
+    <tr>
+        <th>Item</th>
+        <th>Start</th>
+        <th>Stop</th>
+        <th>Days</th>
+        <th>Status</th>
+        <th>Other</th>
     </tr>
-      {% for date,ST,ET,afnumofperson,name,cardnum,machinename,event_place,verify_method,status,thing_type,backup in attendlist %}
-      <tr>
-      <td>{{forloop.counter}}</td>
-      <td>{{date}}</td>
-      <td>{{ST}}</td>
-      <td>{{ET}}</td>
-      <!-- &nbsp&nbsp -->
-      <td>{{afnumofperson}}</td>
-      <!-- &nbsp&nbsp -->
-      <td>{{name}}</td>
-      <!-- &nbsp&nbsp -->
-      <td>{{cardnum}}</td>
-      <!-- &nbsp&nbsp -->
-      <td>{{machinename}}</td>
-      <!-- &nbsp&nbsp -->
-      <td>{{event_place}}</td>
-      <!-- &nbsp&nbsp -->
-      <td>{{verify_method}}</td>
-      <!-- &nbsp&nbsp -->
-      <td>{{status}}</td>
-      <!-- &nbsp&nbsp -->
-      <td>{{thing_type}}</td>
-      <!-- &nbsp&nbsp -->
-      <td>{{backup}}</td> 
-      </tr>
-      {% endfor %}
-  </table>
+   <!-- table header end -->
+<!-- table body -->
 
+   {% comment %}
+     {% if  %}
+   {% endcomment %}
+    <tr>
+        <td>{{item}}</td>
+        <td>{{start}}</td>
+        <td>{{stop}}</td>
+        <td>{{Daysnum}}</td>
+        <td>{{status}}</td>
+        <td><a href="#">detail</a></td>
+    </tr>
+    {% comment %}
+      {% endif %}
+    {% endcomment %}
 
-
+<!-- table body end -->
+</table>
 {%endblock%}
