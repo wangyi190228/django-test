@@ -2,37 +2,31 @@ from django.shortcuts import render
 # my code region
 from django.http import HttpResponseRedirect
 from .forms import UploadFileForm
-
-# Create your views here.
+import xlrd
+import xlwt
 
 # my attend function
-# def attend(request):
-#     # return render(request, 'attend/attendence.html')
-#     if request.method == 'POST':
-#         return render(request, 'test.html')
-#     else:
-#         return render(request, 'test.html')
 
-
-# def excel_upload(request):
+attendlist = []
 def attend(request):
     if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
-        # if form.is_valid():
-        content = {'test': request.FILES['file']}
-            # return HttpResponseRedirect('/attend/')
-        return render(request, 'attend/attendence.html',content)
+        form = UploadFileForm(request.POST,request.FILES)
+        if form.is_valid():
+            f = request.FILES['file']
+            data = xlrd.open_workbook(filename=None,file_contents=f.read(), encoding_override='utf-8')
+            table = data.sheets()[0]
+            nrows = table.nrows
+            myrow = nrows-1
+            for i in range(1,nrows):
+                attendlist.append(table.row_values(i))
+                date = attendlist[i-1][0].split(' ')[0]
+                time = attendlist[i-1][0].split(' ')[1]
+                attendlist[i-1].insert(0,date)
+                attendlist[i-1][1]=time
+            return render(request, 'test.html',{'attendlist':attendlist,'form': form})
     else:
         form = UploadFileForm()
-    # return render(request, 'attend/attendence.html', {'form': form})
-    return render(request, 'attend/attendence.html', {'form': form})
-    # return render(request, 'attend/attendence.html')
-
-
-def handle_uploaded_file(f):
-    with open('numtest.xls', 'wb+') as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
+        return render(request, 'test.html',{'form': form})
 
 
 

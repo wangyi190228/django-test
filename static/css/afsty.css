@@ -164,9 +164,30 @@ hr
     background-color: grey;
 }
 
+<<<<<<< HEAD
 #id_file{
     margin-left: 5px;
+=======
+
+#id_file{
+    margin-left: 10px;
+>>>>>>> 9bd203bf4de63ed663d7394413f5e266b7b92d58
     width: 250px;
     background-color: antiquewhite;
+}
+
+#fileimport{
+    margin-left: 100px;
+}
+.attendtab
+{
+    width: 1200px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right : auto;
+    font-size: 18px;
+    text-align: center;
+    /*  border: 1px solid whitesmoke; */
+    border-collapse: collapse; 
 }
 
