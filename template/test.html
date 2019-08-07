@@ -1,24 +1,31 @@
 {% extends "template.html" %}
 
 <!-- change content -->
+
 {%block bodytag%}
+
 <body class="fimport">
 {%endblock%}
 
+
+  
+
+
 {%block header%}
-<nav class="navlist">
-  <ul>
-    <li>My Annual</li>
-    <li>Application record</li>
-    <li>Approval</li>
-    <li>Leave Application</li>
-  </ul>
-</nav>
+<div class="tabs">
+    <ul>
+      <li><a id="albtn1" href="#1" >My Annual</a></li>
+      <li><a id="albtn2" href="#2" >Application record</a></li>
+      <li><a id="albtn3" href="#3" >Approval</a></li>
+      <li><a id="albtn4" href="#4" >Leave Application</a></li>
+    </ul>
+</div>
+<div class="result">
 <p class="fimporttapp">Annual list</p>
 {%endblock%}
 
 {%block content%}
-    
+    <!-- <a href="#" class="testbtn">test</a> -->
 <table class="annualtab">
     <!-- table header -->
     <tr>
@@ -28,7 +35,7 @@
         <th>Days</th>
         <th>Status</th>
         <th>Other</th>
-    </tr>
+    </tr> 
    <!-- table header end -->
 <!-- table body -->
 
@@ -42,11 +49,12 @@
         <td>{{Daysnum}}</td>
         <td>{{status}}</td>
         <td><a href="#">detail</a></td>
-    </tr>
+    </tr> 
     {% comment %}
       {% endif %}
     {% endcomment %}
 
 <!-- table body end -->
 </table>
+</div>
 {%endblock%}

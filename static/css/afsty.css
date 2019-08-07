@@ -191,10 +191,9 @@ hr
     margin-top: -1.35em
 }
 
-
-.navlist ul,li{
-    display: inline;
-    list-style-type: none;
-    
+.tabs {
+    width: 1000px;
 }
+
+
 
