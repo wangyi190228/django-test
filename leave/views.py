@@ -5,12 +5,16 @@ from django.core.mail import send_mail
 
 # Create your views here.
 # str1 = 'leave/annual.html'
+str3 = 'leave/annual.html'
 str1 = 'test.html'
 str2 = 'leave/annuallist.html'
 # str2 = 'test.html'
 # my annual application function
 def annual(request):
-    return render(request, str1)
+    if request.is_ajax():
+        return render(request, str3)
+    else:
+        return render(request, str1)
 
 # my annuallist application function 
 def annuallist(request):

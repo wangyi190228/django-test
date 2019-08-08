@@ -1,16 +1,19 @@
-{% extends "template.html" %}
+{% comment %} {% extends "template.html" %} {% endcomment %}
 
 <!-- change content -->
-{%block bodytag%}
+{% comment %} {%block bodytag%} {% endcomment %}
 <script src="/static/js/afstl.js"></script>
-<body class="annual">
-{%endblock%}
+{% comment %} <body class="annual"> {% endcomment %}
+{% comment %} {%endblock%} {% endcomment %}
 
-{%block header%}
+{% comment %} {%block header%} {% endcomment %}
 <p class="annualapp">Annual Application</p>
-{%endblock%}
+<hr>
+<hr>
 
-{%block content%}
+{% comment %} {%endblock%} {% endcomment %}
+
+{% comment %} {%block content%} {% endcomment %}
 
 <form class="from-group" action="/annuallist/" method="POST">
     {% csrf_token %} 
@@ -33,4 +36,4 @@
     <br>
     <input name="alsubmit" class="subapp" type="submit" value="submit">
 </form>
-{%endblock%}
+{% comment %} {%endblock%} {% endcomment %}
