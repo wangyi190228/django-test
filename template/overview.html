@@ -1,50 +1,47 @@
 {% extends "template.html" %}
 
 {% block tablist %}
-<div class="tabs">
-    <ul>
-      <li><a id="albtn1"  >My Annual</a></li>
-      <li><a id="albtn2"  >Application record</a></li>
-      <li><a id="albtn3" >Approval</a></li>
-    </ul>
+<div class="tabs" >
+        <ul>
+            <li class="alli1"><a id="albtn1">My Annual</a></li>
+            <li class="alli2"><a id="albtn2">Application record</a></li>
+            <li class="alli3"><a id="albtn3">Approval</a></li>
+        </ul>
 </div>
+<hr>
 {% endblock %}
-
 
 <!-- change content -->
 {%block bodytag%}
+
 <body class="aldays">
-{%endblock%}
+    {%endblock%}
 
 
-{%block header%}
-<p class="aldaysapp">My annual</p>
-{%endblock%}
+    {%block header%}
+    <p class="aldaysapp">My annual</p>
+    {%endblock%}
 
 
-{%block content%}
-<table class="aldaystab">
-    <!-- table header -->
-    <tr>
-        <th>Start</th>
-        <th>Stop</th>
-        <th>Aldays</th>
-        <th>Demaining</th>
-        <th>Used</th>
-    </tr>
-   <!-- table header end -->
-<!-- table body -->
-    <tr>
-        <td>{{Start}}</td>
-        <td>{{stop}}</td>
-        <td>{{Aldays}}</td>
-        <td>{{Demaining}}</td>
-        <td>{{Used}}</td>
-    </tr>
-<!-- table body end -->
-</table>
-{%endblock%}
-
-
-
-
+    {%block content%}
+    <table class="aldaystab">
+        <!-- table header -->
+        <tr>
+            <th>Start</th>
+            <th>Stop</th>
+            <th>Aldays</th>
+            <th>Demaining</th>
+            <th>Used</th>
+        </tr>
+        <!-- table header end -->
+        <!-- table body -->
+        <tr>
+            <td>{{Start}}</td>
+            <td>{{stop}}</td>
+            <td>{{Aldays}}</td>
+            <td>{{Demaining}}</td>
+            <td>{{Used}}</td>
+        </tr>
+        <!-- table body end -->
+    </table>
+    {%endblock%}

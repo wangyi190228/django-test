@@ -8,12 +8,12 @@
     {%block title%}
     <title>AF site admin</title>
     {%endblock%}
-    <link rel="stylesheet" type="text/css" href= "{% static 'css/afsty.css' %}">
-    <link rel="stylesheet" type="text/css" href= "{% static 'css/jquery-ui.min.css' %}">
-    <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/afsty.js' %}"></script>
-    <!-- <script src="/static/js/afsty.js"></script> -->
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+
+    <script  src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <link rel="stylesheet" href= "{% static 'css/jquery-ui.min.css' %}">
+    <link rel="stylesheet" href= "{% static 'css/afsty.css' %}">
+    <script src="{% static 'js/afsty.js' %}"></script>
 </head>
 
 {%block bodytag%}
@@ -26,14 +26,13 @@
                 <embed src="/static/img/af-logo.svg">
                 <li><strong><a href="/login/">Admin systerm of AF Chengdu</a> </strong></li>
                 <li> <a href="/attend/">Attendance</a></li>
-                <li> <a id="getannualpage" href="/overview/">Annual leave</a></li>
+                <li> <a href="/overview/">Annual leave</a></li>
                 <li> <a href="/work/">Working hours</a></li>
                 <li class="logtag"> <a href="/logout/">Logout</a></li>
             </ul>
         </div>
 
         {% block tablist %}
-          
         {% endblock %}
         <!-- body-header end -->
         <div id="body-content">
