@@ -3,7 +3,9 @@ from . import views
 
 urlpatterns = (   
     path('annual/', views.annual), 
+    path('overview/', views.overview), 
     path('annuallist/', views.annuallist),  
+    path('annualdays/', views.annualdays),  
     path('approvallist/', views.approvallist),    
 )
  

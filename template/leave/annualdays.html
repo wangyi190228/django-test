@@ -1,0 +1,36 @@
+
+
+<!-- change content -->
+{%block bodytag%}
+<body class="aldays">
+{%endblock%}
+
+{%block header%}
+<p class="aldaysapp">My annual</p>
+<hr>
+<hr>
+{%endblock%}
+
+
+{%block content%}
+<table class="aldaystab">
+    <!-- table header -->
+    <tr>
+        <th>Start</th>
+        <th>Stop</th>
+        <th>Aldays</th>
+        <th>Demaining</th>
+        <th>Used</th>
+    </tr>
+   <!-- table header end -->
+<!-- table body -->
+    <tr>
+        <td>{{Start}}</td>
+        <td>{{stop}}</td>
+        <td>{{Aldays}}</td>
+        <td>{{Demaining}}</td>
+        <td>{{Used}}</td>
+    </tr>
+<!-- table body end -->
+</table>
+{%endblock%}

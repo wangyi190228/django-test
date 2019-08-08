@@ -56,7 +56,8 @@ body{
 .workapp,
 .annuallistapp,
 .approvallistapp,
-.fimporttapp
+.fimporttapp,
+.aldaysapp
  {
     margin-top:15px; 
     font-size: 24px;
@@ -146,7 +147,8 @@ hr
 /* table */
 .annualtab,
 .attendtab,
-.approvallisttab
+.approvallisttab,
+.aldaystab
  {
    width: 800px;
    margin-left: auto;
@@ -159,7 +161,8 @@ hr
 
 .annualtab th,
 .attendtab th,
-.approvallisttab th
+.approvallisttab th,
+.aldaystab th
  {
     background-color: grey;
 }
@@ -191,9 +194,9 @@ hr
     margin-top: -1.35em
 }
 
-.tabs {
-    width: 1000px;
-}
+/* .tabs ul{
+    width: 100px;
+} */
 
 
 

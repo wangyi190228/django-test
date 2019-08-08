@@ -1,60 +1,13 @@
 {% extends "template.html" %}
 
-<!-- change content -->
-
-{%block bodytag%}
-
-<body class="fimport">
-{%endblock%}
-
-
-  
-
-
-{%block header%}
+{% block tablist %}
 <div class="tabs">
     <ul>
-      <li><a id="albtn1" href="#1" >My Annual</a></li>
-      <li><a id="albtn2" href="#2" >Application record</a></li>
-      <li><a id="albtn3" href="#3" >Approval</a></li>
-      <li><a id="albtn4" href="#4" >Leave Application</a></li>
+      <li><a id="albtn1" href="#/annualdays/" >My Annual</a></li>
+      <li><a id="albtn2" href="#/annuallist/" >Application record</a></li>
+      <li><a id="albtn3" href="#/approvallist/">Approval</a></li>
     </ul>
 </div>
-<div class="result">
-<p class="fimporttapp">Annual list</p>
-{%endblock%}
+{% endblock %}
 
-{%block content%}
-    <!-- <a href="#" class="testbtn">test</a> -->
-<table class="annualtab">
-    <!-- table header -->
-    <tr>
-        <th>Item</th>
-        <th>Start</th>
-        <th>Stop</th>
-        <th>Days</th>
-        <th>Status</th>
-        <th>Other</th>
-    </tr> 
-   <!-- table header end -->
-<!-- table body -->
 
-   {% comment %}
-     {% if  %}
-   {% endcomment %}
-    <tr>
-        <td>{{item}}</td>
-        <td>{{start}}</td>
-        <td>{{stop}}</td>
-        <td>{{Daysnum}}</td>
-        <td>{{status}}</td>
-        <td><a href="#">detail</a></td>
-    </tr> 
-    {% comment %}
-      {% endif %}
-    {% endcomment %}
-
-<!-- table body end -->
-</table>
-</div>
-{%endblock%}

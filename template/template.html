@@ -10,10 +10,9 @@
     {%endblock%}
     <link rel="stylesheet" type="text/css" href= "{% static 'css/afsty.css' %}">
     <link rel="stylesheet" type="text/css" href= "{% static 'css/jquery-ui.min.css' %}">
-    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
-    <script src="{% static 'js/afsty.js' %}"></script>
-
+    <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/afsty.js' %}"></script>
     <!-- <script src="/static/js/afsty.js"></script> -->
 </head>
 
@@ -27,11 +26,15 @@
                 <embed src="/static/img/af-logo.svg">
                 <li><strong><a href="/login/">Admin systerm of AF Chengdu</a> </strong></li>
                 <li> <a href="/attend/">Attendance</a></li>
-                <li> <a href="/annual/">Annual leave</a></li>
+                <li> <a id="getannualpage" href="/overview/">Annual leave</a></li>
                 <li> <a href="/work/">Working hours</a></li>
                 <li class="logtag"> <a href="/logout/">Logout</a></li>
             </ul>
         </div>
+
+        {% block tablist %}
+          
+        {% endblock %}
         <!-- body-header end -->
         <div id="body-content">
             {%block header%}
