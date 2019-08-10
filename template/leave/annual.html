@@ -11,7 +11,7 @@
 
 {%block content%}
 
-<form class="from-group" action="/annuallist/" method="POST">
+<form class="from-group" action="/overview/" method="POST">
     {% csrf_token %} 
     <label >Start: </label> <input name="start" id="startin" class="start" type="date" value=" " onchange="indate()">
     <select name="alstart" id="alstartin" class="alstart" onchange="indate()">

@@ -212,39 +212,3 @@ hr
     padding-bottom: 3px;
     font-size: 18px;
 }
-
-/* .alli1 {
-    background-color:#6495ED; 
-} */
-
-/* .tabs li:hover{
-    background-color:#6495ED; 
-} */
-/* .tabs a:link,.tabs a:visited{
-    background-color: cornsilk; 
-} */
-
-
-/*
-.tabs ul{
-    margin:0;
-    padding:0;
-    display:table;
-    width:100%;
-}
-.tabs ul li{
-    float:left;
-    list-style-type:none;
-    margin-right:2px;
-}
-.tabs ul li a {
-    display: block;
-    padding: 17px 30px;
-    background: #544f6b;
-    text-decoration: none;
-    color: #8478B3;
-} */
-/* .tabs ul li.ui-tabs-active a {background:#fff;color: #655c89;outline:none;} */
-
-
-

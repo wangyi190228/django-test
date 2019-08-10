@@ -16,7 +16,25 @@ def annual(request):
     return render(request, str1)
 
 def overview(request):
-    return render(request, 'overview.html')
+    if request.method == "POST":
+        start = request.POST['start']
+        stop = request.POST['stop']
+        day = request.POST['Daysnum']
+        if  start == '' or stop == '' or day == '0':
+            return redirect('/annual/')
+        else:
+            # send_mail(
+            #     'Remind',
+            #     'You have a new message',
+            #     '1204534516@qq.com',
+            #     ['yi.wang@afconsult.com'],
+            #     fail_silently=False,
+            # )
+            return redirect('/overview/#asb/')
+            # return render(request,'/overview/#asb/',content)
+    else:
+        return render(request, 'overview.html')
+    # return render(request, 'overview.html')
 
 def annualdays(request):
     if request.is_ajax():
