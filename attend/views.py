@@ -56,6 +56,7 @@ def attend(request):
                 time = attendlist[index][0].split(' ')[1]
                 attendlist[index-1].insert(2,time)
                 attendlist.pop(index)
+                
             listlen = len(attendlist) + 1
             workbook = xlwt.Workbook(encoding = 'utf-8')
             # 创建一个worksheet

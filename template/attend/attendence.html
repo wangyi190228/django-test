@@ -14,50 +14,49 @@
     {% csrf_token %}
     {{form}}
     <input name="imsubmit" type="submit" id="import" value="import"/>
-    <!-- <a href="#"><input name="exsubmit" type="button" id="export" value="export"></a> -->
   </form>
+  <!-- query -->
+<form action="" id="attquery">
+  <label for="">Name</label><input type="text" id="staffname" value="">
+  <label for="">Starttime</label><input type="date" id="qstime" value="">
+  <label for="">Endtime</label><input type="date" id="qetime" value="">
+  <label for="">Machine</label>
+  <select name="machinename" id="machinename">
+    <option value="0">All</option>
+    <option value="1">M5</option>
+    <option value="2">M4</option>
+    <option value="3">M3</option>
+  </select>
+  <input name="queryinfo" type="submit" id="queryinfo" value="query">
+  <input name="exsubmit" type="submit" id="export" value="export">
+</form>
 
 <hr>
   <table class="attendtab">
       <tr>
       <th>Item</th>
+      <th>afnum</th>
+      <th>name</th>
       <th>date</th>
+      <th>weekday</th>
       <th>ST</th>
       <th>ET</th>
-      <th>afnumofperson</th>
-      <th>name</th>
-      <th>cardnum</th>
+      <th>hours</th>
       <th>machinename</th>
-      <th>event place</th>
-      <th>verify method</th>
-      <th>status</th>
-      <th>thing type</th>
-      <th>backup</th>
+      <th>verify</th>
     </tr>
-      {% for date,ST,ET,afnumofperson,name,cardnum,machinename,event_place,verify_method,status,thing_type,backup in attendlist %}
+      {% for afnum,name,date,weekday,ST,ET,hours,machinename,verify in attendlist %}
       <tr>
       <td>{{forloop.counter}}</td>
+      <td>{{afnum}}</td>
+      <td>{{name}}</td>
       <td>{{date}}</td>
+      <td>{{weekday}}</td>
       <td>{{ST}}</td>
       <td>{{ET}}</td>
-      <!-- &nbsp&nbsp -->
-      <td>{{afnumofperson}}</td>
-      <!-- &nbsp&nbsp -->
-      <td>{{name}}</td>
-      <!-- &nbsp&nbsp -->
-      <td>{{cardnum}}</td>
-      <!-- &nbsp&nbsp -->
+      <td>{{hours}}</td>
       <td>{{machinename}}</td>
-      <!-- &nbsp&nbsp -->
-      <td>{{event_place}}</td>
-      <!-- &nbsp&nbsp -->
       <td>{{verify_method}}</td>
-      <!-- &nbsp&nbsp -->
-      <td>{{status}}</td>
-      <!-- &nbsp&nbsp -->
-      <td>{{thing_type}}</td>
-      <!-- &nbsp&nbsp -->
-      <td>{{backup}}</td> 
       </tr>
       {% endfor %}
   </table>
