@@ -4,12 +4,23 @@ from django.http import HttpResponseRedirect
 from .forms import UploadFileForm
 import xlrd,xlwt,datetime,os
 from django.http import FileResponse
+from . import models
+from django.db.models.query import QuerySet
 
-
+weekdaylist = {
+    0:'Mon',
+    1:'Tue',
+    2:'Wed',
+    3:'Thu',
+    4:'Fri',
+    5:'Sat',
+    6:'Sun',
+}
 # my attend function
 def attend(request):
     attendlist = []
     templist=[]
+    tempdate = ""
     tempflag = False 
     if request.method == 'POST':
         listlen = 0
@@ -22,70 +33,60 @@ def attend(request):
             for i in range(1,nrows):
                 tempflag =True
                 templist.clear()
-                templist.append(table.row_values(i))
-                if templist[0][1] == '':
+                if table.row_values(i)[1] == '':
                     continue
                 else:
                     listlen = len(attendlist)
-                    if listlen==0:
-                        attendlist.append(table.row_values(i))
-                        attendlist.append(table.row_values(i))
+                    
+                    if listlen==0:   
+                        tempdate = table.row_values(i)[0].split(' ')[0]                    
+                        templist.extend(int(table.row_values(i)[1]),tempdate)                      
+                        templist.append(weekdaylist[datetime.date(tempdate.split('-')[0],tempdate.split('-')[1],tempdate.split('-')[2]).weekday()])
+                        tempdate = table.row_values(i)[0].split(' ')[1]
+                        tempdate = tempdate[0:6]
+                        templist.append(tempdate)
+                        templist.extend(table.row_values(i)[6],tempdate,table.row_values(i)[6],table.row_values(i)[4],0)
+                        attendlist.append(templist)
                     else:
-                        for index in range(0,listlen,2):
-                            if templist[0][0].split(' ')[0] == attendlist[index][0].split(' ')[0] and templist[0][1] != attendlist[index][1]:
+                        for index in range(0,listlen):
+                            tempdate = table.row_values(i)[0].split(' ')[0]
+                            temptime = table.row_values(i)[0].split(' ')[1]
+                            if tempdate == attendlist[index][1] and table.row_values(i)[1] != attendlist[index][0]:
                                 continue
-                            elif templist[0][0].split(' ')[0] == attendlist[index][0].split(' ')[0] and templist[0][1] == attendlist[index][1]:
+                            elif tempdate == attendlist[index][1] and table.row_values(i)[1] == attendlist[index][0]:
                                 tempflag = False
-                                if templist[0][0] < attendlist[index][0]:
-                                    attendlist[index] = templist[0]
-                                elif templist[0][0] > attendlist[index+1][0]:
-                                    attendlist[index+1] = templist[0]
-                            elif templist[0][0].split(' ')[0] != attendlist[index][0].split(' ')[0]:
+                                if temptime < attendlist[index][3]:
+                                    attendlist[index][3] = temptime[0:6]
+                                elif temptime > attendlist[index][5]:
+                                    attendlist[index][5]= temptime[0:6]
+                            elif tempdate != attendlist[index][1]:
                                 tempflag = True
                                 continue
                         if tempflag:
-                            attendlist.append(table.row_values(i))
-                            attendlist.append(table.row_values(i))
-                            
-            listlen = len(attendlist)
-            for index in range((listlen-1),-1,-2):
-                date = attendlist[index-1][0].split(' ')[0]
-                time = attendlist[index-1][0].split(' ')[1]
-                attendlist[index-1].insert(0,date)
-                attendlist[index-1][1]=time
-                time = attendlist[index][0].split(' ')[1]
-                attendlist[index-1].insert(2,time)
-                attendlist.pop(index)
-                
-            listlen = len(attendlist) + 1
-            workbook = xlwt.Workbook(encoding = 'utf-8')
-            # 创建一个worksheet
-            worksheet = workbook.add_sheet('My Worksheet')
-            # 写入excel
-            # 参数对应 行, 列, 值
-            worksheet.write(0,0, 'Item')
-            worksheet.write(0,1, 'Date')
-            worksheet.write(0,2, 'Start Time')
-            worksheet.write(0,3, 'End Time')
-            worksheet.write(0,4, 'Afnumofperson')
-            worksheet.write(0,5, 'Name')
-            worksheet.write(0,6, 'Cardnum')
-            worksheet.write(0,7, 'Machinename')
-            worksheet.write(0,8, 'Event Place')
-            worksheet.write(0,9, 'Verify')
-            worksheet.write(0,10, 'Status')
-            worksheet.write(0,11, 'Type')
-            worksheet.write(0,12, 'Backup')
-            for rindex in range(1,listlen):
-                worksheet.write(rindex,0,rindex)
-                for cindex in range(1,13):
-                    worksheet.write(rindex,cindex, attendlist[rindex-1][cindex-1])
-            # 保存
-            workbook.save('attend.xls')
+                            tempdate = table.row_values(i)[0].split(' ')[0]                    
+                            templist.extend(int(table.row_values(i)[1]),tempdate)                      
+                            templist.append(weekdaylist[datetime.date(tempdate.split('-')[0],tempdate.split('-')[1],tempdate.split('-')[2]).weekday()])
+                            tempdate = table.row_values(i)[0].split(' ')[1]
+                            tempdate = tempdate[0:6]
+                            templist.append(tempdate)
+                            templist.extend(table.row_values(i)[6],tempdate,table.row_values(i)[6],table.row_values(i)[4],0)
+                            attendlist.append(templist)
+                        
+            QuerySet.bulk_create(attendlist)
+            # listlen = len(attendlist)
+            # for index in range((listlen-1),-1,-2):
+            #     date = attendlist[index-1][0].split(' ')[0]
+            #     time = attendlist[index-1][0].split(' ')[1]
+            #     attendlist[index-1].insert(0,date)
+            #     attendlist[index-1][1]=time
+            #     time = attendlist[index][0].split(' ')[1]
+            #     attendlist[index-1].insert(2,time)
+            #     attendlist.pop(index)
             return render(request, 'attend/attendence.html',{'attendlist':attendlist,'form': form})
     else:
         # download file
         if 'exsubmit' in request.GET:   
+
             filedown = open('attend.xls','rb')
             response = FileResponse(filedown)
             response['Content-Type'] = 'application/cetet-stream'

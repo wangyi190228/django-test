@@ -5,14 +5,12 @@ class attendinfo(models.Model):
     staffnum = models.PositiveIntegerField()
     attdate = models.DateField()
     weekday = models.CharField(max_length = 20)
+
     starttime = models.CharField(max_length = 10)
+    verifyS = models.CharField(max_length = 30)
     stoptime = models.CharField(max_length = 10)
-    starttime5 = models.CharField(max_length = 10)
-    stoptime5 = models.CharField(max_length = 10)
-    starttime4 = models.CharField(max_length = 10)
-    stoptime4 = models.CharField(max_length = 10)
-    starttime3 = models.CharField(max_length = 10)
-    stoptime3 = models.CharField(max_length = 10)
-    hours = models.PositiveSmallIntegerField()
+    verifyT = models.CharField(max_length = 30)
+
     machine = models.CharField(max_length = 10)
-    verify = models.CharField(max_length = 30)
+    hours = models.PositiveSmallIntegerField()
+    

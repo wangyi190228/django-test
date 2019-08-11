@@ -17,10 +17,13 @@
   </form>
   <!-- query -->
 <form action="" id="attquery">
-  <label for="">Name</label><input type="text" id="staffname" value="">
-  <label for="">Starttime</label><input type="date" id="qstime" value="">
-  <label for="">Endtime</label><input type="date" id="qetime" value="">
-  <label for="">Machine</label>
+  <label for="">Name: </label><input type="text" id="staffname" value="">
+  &nbsp&nbsp
+  <label for="">Starttime: </label><input type="date" id="qstime" value="">
+  &nbsp&nbsp
+  <label for="">Endtime: </label><input type="date" id="qetime" value="">
+  &nbsp&nbsp
+  <label for="">Machine: </label>
   <select name="machinename" id="machinename">
     <option value="0">All</option>
     <option value="1">M5</option>
@@ -40,12 +43,13 @@
       <th>date</th>
       <th>weekday</th>
       <th>ST</th>
+      <th>verifyS</th>
       <th>ET</th>
+      <th>verifyE</th>
       <th>hours</th>
       <th>machinename</th>
-      <th>verify</th>
     </tr>
-      {% for afnum,name,date,weekday,ST,ET,hours,machinename,verify in attendlist %}
+      {% for afnum,name,date,weekday,ST,verifyS,ET,verifyE,hours,machinename in attendlist %}
       <tr>
       <td>{{forloop.counter}}</td>
       <td>{{afnum}}</td>
@@ -53,10 +57,11 @@
       <td>{{date}}</td>
       <td>{{weekday}}</td>
       <td>{{ST}}</td>
+      <td>{{verifyS}}</td>
       <td>{{ET}}</td>
+      <td>{{verifyE}}</td>
       <td>{{hours}}</td>
       <td>{{machinename}}</td>
-      <td>{{verify_method}}</td>
       </tr>
       {% endfor %}
   </table>
