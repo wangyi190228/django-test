@@ -4,20 +4,11 @@ from django.http import HttpResponseRedirect
 from .forms import UploadFileForm
 import xlrd,xlwt,datetime,os
 from django.http import FileResponse
-from .models import attendinfo
-
-weekdaylist = {
-    0:'Mon',
-    1:'Tue',
-    2:'Wed',
-    3:'Thu',
-    4:'Fri',
-    5:'Sat',
-    6:'Sun',
-}
+from .models import Attendinfo
 # my attend function
 def attend(request):
     attendlist = []
+    readtablelist = []
     templist=[]
     tempdate = ""
     tempflag = False 
@@ -35,16 +26,14 @@ def attend(request):
                 if table.row_values(i)[1] == '':
                     continue
                 else:
-                    listlen = len(attendlist)
-                    
+                    listlen = len(attendlist)    
                     if listlen==0:   
                         tempdate = table.row_values(i)[0].split(' ')[0]                    
-                        templist.extend(int(table.row_values(i)[1]),tempdate)                      
-                        templist.append(weekdaylist[datetime.date(tempdate.split('-')[0],tempdate.split('-')[1],tempdate.split('-')[2]).weekday()])
+                        templist.extend([int(table.row_values(i)[1]),tempdate])                      
+                        templist.append(datetime.datetime(int(tempdate.split('-')[0]),int(tempdate.split('-')[1]),int(tempdate.split('-')[2])).strftime("%a"))
                         tempdate = table.row_values(i)[0].split(' ')[1]
-                        tempdate = tempdate[0:6]
                         templist.append(tempdate)
-                        templist.extend(table.row_values(i)[6],tempdate,table.row_values(i)[6],table.row_values(i)[4],0)
+                        templist.extend([table.row_values(i)[6],tempdate,table.row_values(i)[6],table.row_values(i)[4],0])
                         attendlist.append(templist)
                     else:
                         for index in range(0,listlen):
@@ -55,33 +44,47 @@ def attend(request):
                             elif tempdate == attendlist[index][1] and table.row_values(i)[1] == attendlist[index][0]:
                                 tempflag = False
                                 if temptime < attendlist[index][3]:
-                                    attendlist[index][3] = temptime[0:6]
+                                    attendlist[index][3] = temptime
+                                    attendlist[index][4] = table.row_values(i)[6]
                                 elif temptime > attendlist[index][5]:
-                                    attendlist[index][5]= temptime[0:6]
+                                    attendlist[index][5]= temptime
+                                    attendlist[index][6] = table.row_values(i)[6]
                             elif tempdate != attendlist[index][1]:
                                 tempflag = True
                                 continue
                         if tempflag:
                             tempdate = table.row_values(i)[0].split(' ')[0]                    
-                            templist.extend(int(table.row_values(i)[1]),tempdate)                      
-                            templist.append(weekdaylist[datetime.date(tempdate.split('-')[0],tempdate.split('-')[1],tempdate.split('-')[2]).weekday()])
+                            templist.extend([int(table.row_values(i)[1]),tempdate]) 
+                            templist.append(datetime.datetime(int(tempdate.split('-')[0]),int(tempdate.split('-')[1]),int(tempdate.split('-')[2])).strftime("%a"))
                             tempdate = table.row_values(i)[0].split(' ')[1]
-                            tempdate = tempdate[0:6]
                             templist.append(tempdate)
-                            templist.extend(table.row_values(i)[6],tempdate,table.row_values(i)[6],table.row_values(i)[4],0)
+                            templist.extend([table.row_values(i)[6],tempdate,table.row_values(i)[6],table.row_values(i)[4],0])
                             attendlist.append(templist)
-                        
-            attendinfo.objects.bulk_create(templist)
-            # listlen = len(attendlist)
-            # for index in range((listlen-1),-1,-2):
-            #     date = attendlist[index-1][0].split(' ')[0]
-            #     time = attendlist[index-1][0].split(' ')[1]
-            #     attendlist[index-1].insert(0,date)
-            #     attendlist[index-1][1]=time
-            #     time = attendlist[index][0].split(' ')[1]
-            #     attendlist[index-1].insert(2,time)
-            #     attendlist.pop(index)
-            return render(request, 'attend/attendence.html',{'attendlist':attendlist,'form': form})
+
+
+            readtablelen = Attendinfo.objects.count()
+            if readtablelen == 0:     
+                Attendinfo.objects.bulk_create(attendlist)
+            else:
+                readtablelist = Attendinfo.objects.all()
+                listlen = len(attendlist)
+                for index in range(0,listlen):
+                    readtableflag = True
+                    for readindex in range(0,readtablelen):
+                        if attendlist[index][1] == readtablelist[readindex][1] and\
+                           attendlist[index][0] == readtablelist[readindex][0] and\
+                           attendlist[index][7] == readtablelist[readindex][7]:
+                           if attendlist[index][3] < readtablelist[readindex][3]:
+                                readtableflag = False
+                                readtablelist[readindex][3] = attendlist[index][3]
+                                readtablelist[readindex][4] = attendlist[index][4]
+                           if attendlist[index][5] < readtablelist[readindex][5]:
+                                readtableflag = False
+                                readtablelist[readindex][5] = attendlist[index][5]
+                                readtablelist[readindex][6] = attendlist[index][6]
+                    if readtableflag:
+                        readtablelist.append(attendlist[index])    
+            return render(request, 'attend/attendence.html',{'attendlist':readtablelist,'form': form})
     else:
         # download file
         if 'exsubmit' in request.GET:   
@@ -92,7 +95,6 @@ def attend(request):
             response['Content-Disposition']='attachment;filename=attend.xls'
             return response
         else:
-
             form = UploadFileForm()
             return render(request, 'attend/attendence.html',{'form': form})
 

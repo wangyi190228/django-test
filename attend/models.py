@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class attendinfo(models.Model):
+class Attendinfo(models.Model):
     staffnum = models.PositiveIntegerField()
     attdate = models.DateField()
     weekday = models.CharField(max_length = 20)
@@ -13,4 +13,7 @@ class attendinfo(models.Model):
 
     machine = models.CharField(max_length = 10)
     hours = models.PositiveSmallIntegerField()
+
+
+    
     
