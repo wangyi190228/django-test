@@ -4,8 +4,7 @@ from django.http import HttpResponseRedirect
 from .forms import UploadFileForm
 import xlrd,xlwt,datetime,os
 from django.http import FileResponse
-from . import models
-from django.db.models.query import QuerySet
+from .models import attendinfo
 
 weekdaylist = {
     0:'Mon',
@@ -72,7 +71,7 @@ def attend(request):
                             templist.extend(table.row_values(i)[6],tempdate,table.row_values(i)[6],table.row_values(i)[4],0)
                             attendlist.append(templist)
                         
-            QuerySet.bulk_create(attendlist)
+            attendinfo.objects.bulk_create(templist)
             # listlen = len(attendlist)
             # for index in range((listlen-1),-1,-2):
             #     date = attendlist[index-1][0].split(' ')[0]
