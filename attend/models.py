@@ -12,7 +12,7 @@ class Attendinfo(models.Model):
     verifyT = models.CharField(max_length = 30)
 
     machine = models.CharField(max_length = 10)
-    hours = models.PositiveSmallIntegerField()
+    hours = models.FloatField()
 
 
     
