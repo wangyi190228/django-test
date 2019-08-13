@@ -70,9 +70,14 @@ def attend(request):
                             templist.extend([table.row_values(i)[6],tempdate,table.row_values(i)[6],table.row_values(i)[4],0.0])
                             attendlist.append([])
                             attendlist[listlen] = templist.copy()
+
+            # listlen = len(attendlist)
             # readtablelen = Attendinfo.objects.count()
-            # if readtablelen == 0:     
+            # if readtablelen == 0:    
+            #     for index in range(0,listlen):
+            #         attendlist[index].insert(0,Attendinfo(id=index))
             #     Attendinfo.objects.bulk_create(attendlist)
+            # readtablelist = Attendinfo.objects.all()
             # else:
             #     readtablelist = Attendinfo.objects.all()
             #     listlen = len(attendlist)
