@@ -14,6 +14,9 @@ class Attendinfo(models.Model):
     machine = models.CharField(max_length = 10)
     hours = models.FloatField()
 
+    # def __str__(self):
+    #     return self.staffnum
+
 
     
     

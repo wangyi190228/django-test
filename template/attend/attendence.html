@@ -49,21 +49,21 @@
       <th>machinename</th>
       <th>hours</th>
     </tr>
-      {% for afnum,name,date,weekday,ST,verifyS,ET,verifyE,machinename,hours in attendlist %}
+      {% for index in attendlist %}
       <tr>
       <td>{{forloop.counter}}</td>
-      <td>{{afnum}}</td>
+      <td>{{index.staffnum}}</td>
       <!-- <td>{{name}}</td> -->
-      <td>{{date}}</td>
-      <td>{{weekday}}</td>
-      <td>{{ST}}</td>
-      <td>{{verifyS}}</td>
-      <td>{{ET}}</td>
-      <td>{{verifyE}}</td>
-      <td>{{machinename}}</td>
-      <td>{{hours}}</td>
+      <td>{{index.attdate}}</td>
+      <td>{{index.weekday}}</td>
+      <td>{{index.starttime}}</td>
+      <td>{{index.verifyS}}</td>
+      <td>{{index.stoptime}}</td>
+      <td>{{index.verifyT}}</td>
+      <td>{{index.machine}}</td>
+      <td>{{index.hours}}</td>
       
       </tr>
       {% endfor %}
-  </table>  {% endcomment %}
+  </table> 
 {%endblock%}
