@@ -33,13 +33,15 @@
   <input name="queryinfo" type="submit" id="queryinfo" value="query">
   <input name="exsubmit" type="submit" id="export" value="export">
 </form>
+{{len}}
+{{attendlist}}
 
 <hr>
-  <table class="attendtab">
+   {% comment %} <table class="attendtab">
       <tr>
       <th>Item</th>
       <th>afnum</th>
-      <th>name</th>
+      <!-- <th>name</th> -->
       <th>date</th>
       <th>weekday</th>
       <th>ST</th>
@@ -49,11 +51,11 @@
       <th>hours</th>
       <th>machinename</th>
     </tr>
-      {% for afnum,name,date,weekday,ST,verifyS,ET,verifyE,hours,machinename in attendlist %}
+      {% for afnum,date,weekday,ST,verifyS,ET,verifyE,hours,machinename in attendlist %}
       <tr>
       <td>{{forloop.counter}}</td>
       <td>{{afnum}}</td>
-      <td>{{name}}</td>
+      <!-- <td>{{name}}</td> -->
       <td>{{date}}</td>
       <td>{{weekday}}</td>
       <td>{{ST}}</td>
@@ -64,5 +66,5 @@
       <td>{{machinename}}</td>
       </tr>
       {% endfor %}
-  </table>
+  </table>  {% endcomment %}
 {%endblock%}
