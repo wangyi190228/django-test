@@ -33,35 +33,36 @@
   <input name="queryinfo" type="submit" id="queryinfo" value="query">
   <input name="exsubmit" type="submit" id="export" value="export">
 </form>
-
 <hr>
+{{test}}
   <table class="attendtab">
       <tr>
       <th>Item</th>
       <th>afnum</th>
-      <th>name</th>
+      <!-- <th>name</th> -->
       <th>date</th>
       <th>weekday</th>
       <th>ST</th>
       <th>verifyS</th>
       <th>ET</th>
       <th>verifyE</th>
-      <th>hours</th>
       <th>machinename</th>
+      <th>hours</th>
     </tr>
-      {% for afnum,name,date,weekday,ST,verifyS,ET,verifyE,hours,machinename in attendlist %}
+      {% for afnum,date,weekday,ST,verifyS,ET,verifyE,machinename,hours in attendlist %}
       <tr>
       <td>{{forloop.counter}}</td>
       <td>{{afnum}}</td>
-      <td>{{name}}</td>
+      <!-- <td>{{name}}</td> -->
       <td>{{date}}</td>
       <td>{{weekday}}</td>
       <td>{{ST}}</td>
       <td>{{verifyS}}</td>
       <td>{{ET}}</td>
       <td>{{verifyE}}</td>
-      <td>{{hours}}</td>
       <td>{{machinename}}</td>
+      <td>{{hours}}</td>
+      
       </tr>
       {% endfor %}
   </table>
