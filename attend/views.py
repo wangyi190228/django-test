@@ -26,7 +26,6 @@ def attend(request):
                 if table.row_values(i)[1] == '':
                     continue
                 else:
-                    
                     listlen = len(attendlist)    
                     if listlen==0:   
                         tempdate = datetime.datetime.strptime(table.row_values(i)[0].split(' ')[0],"%Y-%m-%d").date()            
@@ -79,38 +78,36 @@ def attend(request):
                     verifyS = attendlist[index][4],stoptime =attendlist[index][5] ,verifyT =attendlist[index][6] ,machine =attendlist[index][7] ,hours=attendlist[index][8],
                     )
                 Attendinfo.objects.bulk_create(attendlist)
+                attendlist.clear()
             else:
+                # filter condition 
+                readtablelist.clear()
                 readtablelist = Attendinfo.objects.all()
-                listlen = len(attendlist) - 1
-                for index in range(listlen,-1,-1):
+                # filter condition
+                for index in reversed(attendlist):
                     readtableflag = True
-                    for readindex in readtablelist:
-                        # readtablelist = Attendinfo.objects.all()
-                        if attendlist[index][1] == readindex.attdate and\
-                           attendlist[index][0] == readindex.staffnum and\
-                           attendlist[index][7] == readindex.machine:
-                           return render(request, 'attend/attendence.html',{'attendlist': readtablelist ,'form': form,'test': 1})
-
-                           if attendlist[index][3] < readindex.starttime:
+                    for readindex in  readtablelist:          
+                        if  index[1] == readindex.attdate and\
+                            index[0] == readindex.staffnum and\
+                            index[7] == readindex.machine:
+                            if index[3] < readindex.starttime:
                                 readtableflag = False
-                                readindex.update(starttime = attendlist[index][3],verifyS = attendlist[index][4])
 
-                                # readtablelist[readindex].starttime = attendlist[index][3]
-                                # readtablelist[readindex].verifyS = attendlist[index][4]
-                           if attendlist[index][5] < readindex.stoptime:
+                                readindex.objects.update(starttime = index[3],verifyS = index[4])
+                            if index[5] < readindex.stoptime:
                                 readtableflag = False
-                                readindex.update(stoptime = attendlist[index][5],verifyT = attendlist[index][6])
-                            
-                                # readtablelist[readindex].stoptime = attendlist[index][5]
-                                # readtablelist[readindex].verifyT = attendlist[index][6]
-                    if readtableflag == False:
-                        attendlist.pop(index)
+                                readindex.update(stoptime = index[5],verifyT = index[6])                      
+                            attendlist.remove(index)
+
+                        
                 listlen = len(attendlist)
                 for index in range(0,listlen):
                     attendlist[index]=Attendinfo(staffnum =attendlist[index][0] ,attdate =attendlist[index][1] ,weekday =attendlist[index][2] ,starttime =attendlist[index][3],
                     verifyS = attendlist[index][4],stoptime =attendlist[index][5] ,verifyT =attendlist[index][6] ,machine =attendlist[index][7] ,hours=attendlist[index][8],
                     )
                 Attendinfo.objects.bulk_create(attendlist)
+                attendlist.clear()
+            # readindex.delete()
             readtablelist = Attendinfo.objects.all()
             return render(request, 'attend/attendence.html',{'attendlist':readtablelist,'form': form})
     else:
@@ -127,6 +124,7 @@ def attend(request):
             return render(request, 'attend/attendence.html',{'form': form})
 
 
+                        # return render(request, 'attend/attendence.html',{'attendlist': readtablelist ,'form': form,'test': readtablelen,'test2':str(type(readtablelist))})
 
 
 
