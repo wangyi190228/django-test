@@ -81,7 +81,7 @@ def attend(request):
                 attendlist.clear()
             else:
                 # filter condition 
-                readtablelist.clear()
+
                 readtablelist = Attendinfo.objects.all()
                 # filter condition
                 for index in reversed(attendlist):
@@ -92,14 +92,12 @@ def attend(request):
                             index[7] == readindex.machine:
                             if index[3] < readindex.starttime:
                                 readtableflag = False
-
-                                readindex.objects.update(starttime = index[3],verifyS = index[4])
+                                # return render(request, 'attend/attendence.html',{'attendlist': readtablelist ,'form': form,'test': readindex.id,'test2':12})
+                                Attendinfo.objects.filter(id = readindex.id).update(starttime = index[3],verifyS = index[4])
                             if index[5] < readindex.stoptime:
                                 readtableflag = False
-                                readindex.update(stoptime = index[5],verifyT = index[6])                      
-                            attendlist.remove(index)
-
-                        
+                                Attendinfo.objects.filter(id = readindex.id).update(stoptime = index[5],verifyT = index[6])                    
+                            attendlist.remove(index)                        
                 listlen = len(attendlist)
                 for index in range(0,listlen):
                     attendlist[index]=Attendinfo(staffnum =attendlist[index][0] ,attdate =attendlist[index][1] ,weekday =attendlist[index][2] ,starttime =attendlist[index][3],
@@ -107,7 +105,6 @@ def attend(request):
                     )
                 Attendinfo.objects.bulk_create(attendlist)
                 attendlist.clear()
-            # readindex.delete()
             readtablelist = Attendinfo.objects.all()
             return render(request, 'attend/attendence.html',{'attendlist':readtablelist,'form': form})
     else:
@@ -119,6 +116,28 @@ def attend(request):
             response['Content-Type'] = 'application/cetet-stream'
             response['Content-Disposition']='attachment;filename=attend.xls'
             return response
+        elif 'queryinfo' in request.GET:
+            staffname = request.GET['staffname']
+            qstime = request.GET['qstime']
+            qetime = request.GET['qetime']
+            Mname = request.GET['machinename']
+            # return render(request, 'attend/attendence.html',{'attendlist': readtablelist ,'test': str(type(Mname)),'test2':str(type(readtablelist))})
+
+            if  (qstime == '' and qetime != '') or (qstime != '' and qetime == '') or (qstime > qetime):
+                return redirect('/attend/')
+            else:
+                if staffname == '':
+                    staffname = '*'
+                if Mname == '1':
+                    Mname = 'AFCD-03'
+                elif Mname == '2':
+                    Mname = 'AFCD-04'
+                elif Mname == '3':
+                    Mname = 'AFCD-05'
+                else:
+                    Mname = '*'
+                readtablelist = Attendinfo.objects.filter(staffnum = int(staffname),starttime__gte = qstime,starttime__lte = qetime,machine = Mname)
+                return render(request, 'attend/attendence.html',{'attendlist':readtablelist})
         else:
             form = UploadFileForm()
             return render(request, 'attend/attendence.html',{'form': form})
