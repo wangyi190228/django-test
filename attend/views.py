@@ -109,6 +109,8 @@ def attend(request):
             return render(request, 'attend/attendence.html',{'attendlist':readtablelist,'form': form})
     else:
         form = UploadFileForm()
+        if os.path.exists('attend.xls'):
+            os.remove('attend.xls')
         if ('exsubmit' in request.GET) or ('queryinfo' in request.GET):
             staffname = request.GET['staffname']
             qstime = request.GET['qstime']
@@ -131,9 +133,40 @@ def attend(request):
                     readtablelist = Attendinfo.objects.filter(staffnum = int(staffname),machine__icontains = Mname)
                 else:
                     readtablelist = Attendinfo.objects.filter(staffnum = int(staffname),attdate__gte = qstime,attdate__lte = qetime,machine__icontains = Mname)
+                # if Mname == 'AFCD':
+                # return render(request, 'attend/attendence.html',{'attendlist':readtablelist,'form': form})
+
+
             # download file
             if 'exsubmit' in request.GET:  
-
+                workbook = xlwt.Workbook(encoding = 'utf-8')
+                worksheet = workbook.add_sheet('attenddata')
+                worksheet.write(0,0, 'Item')
+                worksheet.write(0,1, 'Afnum')
+                worksheet.write(0,2, 'Name')
+                worksheet.write(0,3, 'Date')
+                worksheet.write(0,4, 'weekday')
+                worksheet.write(0,5, 'Start Time')
+                worksheet.write(0,6, 'verifyS')
+                worksheet.write(0,7, 'End Time')
+                worksheet.write(0,8, 'verifyE')               
+                worksheet.write(0,9, 'Machinename')
+                worksheet.write(0,10, 'Hours') 
+                i = 0           
+                for rindex in reversed(readtablelist):
+                    i+=1
+                    worksheet.write(i,0,i)
+                    worksheet.write(i,1, rindex.staffnum)
+                    # worksheet.write(i,2, rindex.)
+                    worksheet.write(i,3, rindex.attdate)
+                    worksheet.write(i,4, rindex.weekday)
+                    worksheet.write(i,5, rindex.starttime)
+                    worksheet.write(i,6, rindex.verifyS)
+                    worksheet.write(i,7, rindex.stoptime)
+                    worksheet.write(i,8, rindex.verifyT)
+                    worksheet.write(i,9, rindex.machine)
+                    worksheet.write(i,10, rindex.hours)
+                workbook.save('attend.xls')
                 filedown = open('attend.xls','rb')
                 response = FileResponse(filedown)
                 response['Content-Type'] = 'application/cetet-stream'
