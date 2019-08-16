@@ -11,64 +11,31 @@
 
 
 
-{%block content%}  
+{%block content%} 
 <form id="fileimport" action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{form}}
-    <input name="imsubmit" type="submit" id="import" value="import"/>
-  </form>
-  <!-- query -->
-<form action="" id="attquery">
-  <label for="">Name: </label><input name="staffname" type="text" id="staffname" value="">
-  &nbsp&nbsp
-  <label for="">Starttime: </label><input name="qstime" type="date" id="qstime" value="">
-  &nbsp&nbsp
-  <label for="">Endtime: </label><input name="qetime" type="date" id="qetime" value="">
-  &nbsp&nbsp
-  <label for="">Machine: </label>
-  <select name="machinename" id="machinename">
-    <option value="0">Overall</option>
-    <option value="1">M3</option>
-    <option value="2">M4</option>
-    <option value="3">M5</option>
-  </select>
-  <input name="queryinfo" type="submit" id="queryinfo" value="query">
-  <input name="exsubmit" type="submit" id="export" value="export">
+  {% csrf_token %}
+  {{form}}
+  <input name="imsubmit" type="submit" id="import" value="import"/>
 </form>
-
+<!-- query -->
+<form action="" id="attquery">
+<label for="">Name: </label><input name="staffname" type="text" id="staffname" value="">
+&nbsp&nbsp
+<label for="">Starttime: </label><input name="qstime" type="date" id="qstime" value="">
+&nbsp&nbsp
+<label for="">Endtime: </label><input name="qetime" type="date" id="qetime" value="">
+&nbsp&nbsp
+<label for="">Machine: </label>
+<select name="machinename" id="machinename">
+  <option value="0">Overall</option>
+  <option value="1">M3</option>
+  <option value="2">M4</option>
+  <option value="3">M5</option>
+</select>
+<input name="queryinfo" type="submit" id="queryinfo" value="query">
+<input name="exsubmit" type="submit" id="export" value="export">
+</form>
 {{test}}
-<!-- {{test2}} -->
-<hr>
-<!-- {{attendlist}} -->
-  <table class="attendtab">
-      <tr>
-      <th>Item</th>
-      <th>afnum</th>
-      <!-- <th>name</th> -->
-      <th>date</th>
-      <th>weekday</th>
-      <th>ST</th>
-      <th>verifyS</th>
-      <th>ET</th>
-      <th>verifyE</th>
-      <th>machinename</th>
-      <th>hours</th>
-    </tr>
-      {% for index in attendlist %}
-      <tr>
-      <td>{{forloop.counter}}</td>
-      <td>{{index.staffnum}}</td>
-      <!-- <td>{{name}}</td> -->
-      <td>{{index.attdate}}</td>
-      <td>{{index.weekday}}</td>
-      <td>{{index.starttime}}</td>
-      <td>{{index.verifyS}}</td>
-      <td>{{index.stoptime}}</td>
-      <td>{{index.verifyT}}</td>
-      <td>{{index.machine}}</td>
-      <td>{{index.hours}}</td>
-      
-      </tr>
-      {% endfor %}
-  </table> 
+<hr> 
+<iframe src="/content/" frameborder="0" width="100%" height="570px"></iframe>
 {%endblock%}

@@ -108,26 +108,17 @@ def attend(request):
             readtablelist = Attendinfo.objects.all()
             return render(request, 'attend/attendence.html',{'attendlist':readtablelist,'form': form})
     else:
-        # download file
-        if 'exsubmit' in request.GET:   
-
-            filedown = open('attend.xls','rb')
-            response = FileResponse(filedown)
-            response['Content-Type'] = 'application/cetet-stream'
-            response['Content-Disposition']='attachment;filename=attend.xls'
-            return response
-        elif 'queryinfo' in request.GET:
+        form = UploadFileForm()
+        if ('exsubmit' in request.GET) or ('queryinfo' in request.GET):
             staffname = request.GET['staffname']
             qstime = request.GET['qstime']
             qetime = request.GET['qetime']
             Mname = request.GET['machinename']
-            # return render(request, 'attend/attendence.html',{'attendlist': readtablelist ,'test': str(type(Mname)),'test2':str(type(readtablelist))})
-
             if  (qstime == '' and qetime != '') or (qstime != '' and qetime == '') or (qstime > qetime):
                 return redirect('/attend/')
             else:
                 if staffname == '':
-                    staffname = '*'
+                    staffname = '9'
                 if Mname == '1':
                     Mname = 'AFCD-03'
                 elif Mname == '2':
@@ -135,14 +126,27 @@ def attend(request):
                 elif Mname == '3':
                     Mname = 'AFCD-05'
                 else:
-                    Mname = '*'
-                readtablelist = Attendinfo.objects.filter(machine = Mname)
-                return render(request, 'attend/attendence.html',{'attendlist':readtablelist})
+                    Mname = 'AFCD'
+                if qstime == '' and qetime == '':
+                    readtablelist = Attendinfo.objects.filter(staffnum = int(staffname),machine__icontains = Mname)
+                else:
+                    readtablelist = Attendinfo.objects.filter(staffnum = int(staffname),attdate__gte = qstime,attdate__lte = qetime,machine__icontains = Mname)
+            # download file
+            if 'exsubmit' in request.GET:  
+
+                filedown = open('attend.xls','rb')
+                response = FileResponse(filedown)
+                response['Content-Type'] = 'application/cetet-stream'
+                response['Content-Disposition']='attachment;filename=attend.xls'
+                return response
+            elif 'queryinfo' in request.GET: 
+
+                return render(request, '/content/',{'attendlist':readtablelist,'form': form})
         else:
-            form = UploadFileForm()
             return render(request, 'attend/attendence.html',{'form': form})
 
-
+def content(request):
+    return render(request, 'attend/attendcontent.html')
                         # return render(request, 'attend/attendence.html',{'attendlist': readtablelist ,'form': form,'test': readtablelen,'test2':str(type(readtablelist))})
 
 

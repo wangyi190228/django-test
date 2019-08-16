@@ -129,6 +129,11 @@ hr
 #tbofday{
     border: 1px solid black;
 }
+#body-footer {
+    position: absolute;
+    top:750px;
+    width: 100%;
+}
 
 /* body footer */
 #body-footer embed

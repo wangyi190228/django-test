@@ -1,0 +1,34 @@
+
+<link type='text/css' rel="stylesheet" href= "/static/css/afsty.css">
+<!-- {{attendlist}} -->
+  <table class="attendtab">
+      <tr>
+      <th>Item</th>
+      <th>afnum</th>
+      <!-- <th>name</th> -->
+      <th>date</th>
+      <th>weekday</th>
+      <th>ST</th>
+      <th>verifyS</th>
+      <th>ET</th>
+      <th>verifyE</th>
+      <th>machinename</th>
+      <th>hours</th>
+    </tr>
+      {% for index in attendlist %}
+      <tr>
+      <td>{{forloop.counter}}</td>
+      <td>{{index.staffnum}}</td>
+      <!-- <td>{{name}}</td> -->
+      <td>{{index.attdate}}</td>
+      <td>{{index.weekday}}</td>
+      <td>{{index.starttime}}</td>
+      <td>{{index.verifyS}}</td>
+      <td>{{index.stoptime}}</td>
+      <td>{{index.verifyT}}</td>
+      <td>{{index.machine}}</td>
+      <td>{{index.hours}}</td>
+      
+      </tr>
+      {% endfor %}
+  </table> 
