@@ -136,7 +136,7 @@ def attend(request):
                     Mname = 'AFCD-05'
                 else:
                     Mname = '*'
-                readtablelist = Attendinfo.objects.filter(staffnum = int(staffname),starttime__gte = qstime,starttime__lte = qetime,machine = Mname)
+                readtablelist = Attendinfo.objects.filter(machine = Mname)
                 return render(request, 'attend/attendence.html',{'attendlist':readtablelist})
         else:
             form = UploadFileForm()
