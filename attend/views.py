@@ -140,8 +140,7 @@ def attend(request):
                 response['Content-Disposition']='attachment;filename=attend.xls'
                 return response
             elif 'queryinfo' in request.GET: 
-
-                return render(request, '/content/',{'attendlist':readtablelist,'form': form})
+                return render(request, 'attend/attendence.html',{'attendlist':readtablelist,'form': form})
         else:
             return render(request, 'attend/attendence.html',{'form': form})
 
