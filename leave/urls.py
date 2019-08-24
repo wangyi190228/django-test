@@ -6,6 +6,7 @@ urlpatterns = (
     path('overview/', views.overview), 
     path('annuallist/', views.annuallist),  
     path('annualdays/', views.annualdays),  
-    path('approvallist/', views.approvallist),    
+    path('approvallist/', views.approvallist),   
+    path('staffleave/', views.staffleave),   
 )
  

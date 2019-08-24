@@ -57,7 +57,8 @@ body{
 .annuallistapp,
 .approvallistapp,
 .fimporttapp,
-.aldaysapp
+.aldaysapp,
+.allstaffalapp
  {
     margin-top:15px; 
     font-size: 24px;
@@ -153,7 +154,8 @@ hr
 .annualtab,
 .attendtab,
 .approvallisttab,
-.aldaystab
+.aldaystab,
+.allstaffaltab
  {
    width: 800px;
    margin-left: auto;
@@ -167,7 +169,8 @@ hr
 .annualtab th,
 .attendtab th,
 .approvallisttab th,
-.aldaystab th
+.aldaystab th,
+.allstaffaltab th
  {
     background-color: grey;
 }
@@ -199,21 +202,4 @@ hr
     margin-top: -1.35em
 }
 
-.tabs ul{
-    /* background-color:#98F5FF; */
-    text-align: center; 
-    list-style-type:none;
-    padding: 0px;
-    width:420px;
-    
-    /* color: #2F4F4F; */
-}
 
-.tabs ul li{
-   
-    background-color:#98F5FF;
-    display: inline;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    font-size: 18px;
-}

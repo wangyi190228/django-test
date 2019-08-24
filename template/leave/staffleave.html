@@ -1,0 +1,48 @@
+
+<!-- change content -->
+{%block bodytag%}
+<body class="allstaffal">
+{%endblock%}
+
+{%block header%}
+<p class="allstaffalapp">All staff al</p>
+<hr>
+<hr>
+{%endblock%}
+
+
+{%block content%}
+<table class="allstaffaltab">
+    <!-- table header -->
+    <tr>
+        <th>Name</th>
+        <th>Remaindays</th>
+        <th>Detail</th>
+    </tr>
+   <!-- table header end -->
+<!-- table body -->
+    <tr>
+        <td>{{Name}}</td>
+        <td>{{Remaindays}}</td>
+        <td>
+            <table>
+                <tr>
+                    <th>Starttime</th>
+                    <th>Endtime</th>
+                    <th>Overtime</th>
+                    <th>Sumdays</th>
+                    <th>Remaindays</th>
+                    <th>Useddays</th>
+                </tr>
+                {% comment %}
+                {% for  in  %}
+                <tr></tr>
+              {% endfor %}
+                {% endcomment %}
+
+            </table>
+        </td>
+    </tr>
+<!-- table body end -->
+</table>
+{%endblock%}

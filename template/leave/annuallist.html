@@ -1,12 +1,17 @@
-{% comment %} {% extends "template.html" %} {% endcomment %}
 
+{% load static %}
 <!-- change content -->
 {%block bodytag%}
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script  src="{% static 'js/jquery-ui.min.js' %}"></script>
+<link rel="stylesheet" href= "{% static 'css/jquery-ui.min.css' %}">
+<script src="{% static 'js/afsty2.js' %}"></script>
+<link rel="stylesheet" href= "{% static 'css/afsty.css' %}">
 <body class="fimport">
 {%endblock%}
 
 {%block header%}
-<button><a href="/annual/">annual apl</a> </button>
+<a href="/annual/" class="alaplbtn">Application</a>
 <p class="fimporttapp">Annual list</p>
 <hr>
 <hr>

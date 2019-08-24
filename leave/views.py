@@ -4,12 +4,11 @@ from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 
 # Create your views here.
-# str1 = 'leave/annual.html'
 str3 = 'leave/approvallist.html'
 str1 = 'leave/annual.html'
 str2 = 'leave/annuallist.html'
 str4 = 'leave/annualdays.html'
-# str2 = 'test.html'
+str5 = 'leave/staffleave.html'
 # my annual application function
 
 def annual(request):
@@ -30,7 +29,7 @@ def overview(request):
             #     ['yi.wang@afconsult.com'],
             #     fail_silently=False,
             # )
-            return redirect('/overview/#asb/')
+            return redirect('/overview/')
             # return render(request,'/overview/#asb/',content)
     else:
         return render(request, 'overview.html')
@@ -42,12 +41,19 @@ def annualdays(request):
     else:
         return render(request, str1)
 
+
+def staffleave(request):
+    if request.is_ajax():
+        return render(request, str5)
+    else:
+        return render(request, str1)
+
+
 # my annuallist application function 
 def annuallist(request):
     if request.is_ajax():
         return render(request, str2)
     else:
-
         if request.method == "POST":
             start = request.POST['start']
             stop = request.POST['stop']
