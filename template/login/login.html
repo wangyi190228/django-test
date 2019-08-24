@@ -1,11 +1,14 @@
+{% load static %}
 <!DOCTYPE html>
 
 <html lang="en-us">
 
 <head>
     <title>AF site admin</title>
+
     <link rel="stylesheet" type="text/css" href="/static/css/base.css"> 
     <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/afsty.css">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="robots" content="NONE,NOARCHIVE">
 </head>
@@ -46,8 +49,9 @@
 
                     <div class="submit-row">
                         <label>&nbsp;</label><input type="submit" value="Log in">
-                        <a id="signup" href="/register/">Sign up</a>
+                       
                     </div>
+                    <a id="resetpwd" href="/resetpwd/">Forget password</a>
                 </form>
             </div>
             <br class="clear">
