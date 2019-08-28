@@ -12,13 +12,13 @@
 
 <form class="from-group" action="/overview/" method="POST">
     {% csrf_token %} 
-    <label >Start: </label> <input name="start" id="startin" class="start" type="date" value=" " onchange="indate()">
+    <label >Start: </label> <input name="start" id="startin" class="start" type="text" value=" " onchange="indate()">
     <select name="alstart" id="alstartin" class="alstart" onchange="indate()">
         <option value="0">9:00</option>
         <option value="1">13:00</option>
     </select>
     &nbsp&nbsp&nbsp&nbsp
-    <label >Stop: </label> <input name="stop" id="stopin" class="stop" type="date" value=" " onchange="indate()">
+    <label >Stop: </label> <input name="stop" id="stopin" class="stop" type="text" value=" " onchange="indate()">
     <select name="alstop" id="alstopin" class="alstop" onchange="indate()">
         <option value="0">17:30</option>
         <option value="1">13:00</option>
