@@ -31,8 +31,12 @@
         <div id="content" class="colM">
 
             <div id="content-main">
-
-                <form action="index.html" method="post" id="login-form"><input type="hidden"
+                {% if alert %}
+                  <script>
+                      alert("username or password error!")
+                  </script>
+                {% endif %}
+                <form  method="post" id="login-form"><input type="hidden"
                         name="csrfmiddlewaretoken"
                         value="1WItEpaD1kmTsHYF7TY1yzc5AqKCSUdhhRXtWH3hks5dlJJ8qtRnuyNfq2DLnWg8">
                         {% csrf_token %}

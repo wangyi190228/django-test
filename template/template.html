@@ -23,14 +23,16 @@
 
     <div id="container">
         <div id="body-header">
+                {%block body-header%}
             <ul>
                 <embed src="/static/img/af-logo.svg">
-                <li><strong><a href="/login/">Admin systerm of AF Chengdu</a> </strong></li>
+                <li><strong><a href="/home/">Admin systerm of AF Chengdu</a> </strong></li>
                 <li> <a href="/attend/">Attendance</a></li>
                 <li> <a href="/overview/">Annual leave</a></li>
                 <li> <a href="/work/">Working hours</a></li>
                 <li class="logtag"> <a href="/logout/">Logout</a></li>
             </ul>
+            {%endblock%}
         </div>
 
         {% block tablist %}
@@ -40,9 +42,11 @@
             {%block header%}
             <p class="template">template</p>
             {%endblock%}
+            {%block cut-off-line%}
             <hr>
             <hr>
             <br>
+            {%endblock%}
             {%block content%}
             <p>this is the template</p>
             {%endblock%}

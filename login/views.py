@@ -1,8 +1,6 @@
-from django.shortcuts import render
-
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login,logout
 
 
 # Create your views here.
@@ -10,29 +8,30 @@ from django.contrib.auth import authenticate, login
 # my login function
 
 def aflogin(request):
+    alert = False
     if request.method == 'GET':
         return render(request, 'login/login.html')
     else:
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')   
         user = authenticate(request, username=username, password=password)
-        if user is not None:
+        if user:
             login(request, user)
-            return redirect(reverse('login:home'))
+            return redirect("/home/")
         else:
-            return render(request, 'login/login.html', {
-                'username': username,
-                'password': password,
-            })
+            alert = True
+            return render(request, 'login/login.html',{'alert':alert})
+
 
 # my logout function
-def logout(request):
+def aflogout(request):
+    logout(request)
     return render(request, 'login/logout.html')
 
 # my register function
 def resetpwd(request):
     return render(request, 'login/resetpwd.html')
 
-@login_required(login_url='/login/')
+@login_required()
 def home(request):
       return render(request,'home.html')

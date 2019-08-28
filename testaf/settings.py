@@ -56,6 +56,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'testaf.urls'
+LOGIN_URL = "/login/"
 
 TEMPLATES = [
     {

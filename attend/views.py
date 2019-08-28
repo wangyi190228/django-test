@@ -5,7 +5,9 @@ from .forms import UploadFileForm
 import xlrd,xlwt,datetime,os,time
 from django.http import FileResponse
 from .models import Attendinfo
+from django.contrib.auth.decorators import login_required
 # my attend function
+@login_required()
 def attend(request):
     attendlist = []
     readtablelist = []
@@ -177,6 +179,8 @@ def attend(request):
         else:
             return render(request, 'attend/attendence.html',{'form': form})
 
+
+@login_required()
 def content(request):
     return render(request, 'attend/attendcontent.html')
                         # return render(request, 'attend/attendence.html',{'attendlist': readtablelist ,'form': form,'test': readtablelen,'test2':str(type(readtablelist))})
