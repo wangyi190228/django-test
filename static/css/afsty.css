@@ -90,7 +90,7 @@ hr
     margin-top:-1em; 
 }
 
-.from-group .start,.stop {
+.from-group .start,.stop,#Applicant,#Createtime,#Leader {
     width: 150px;
     height: 22px;
     padding-left:10px; 

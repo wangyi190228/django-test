@@ -38,6 +38,7 @@ def annual(request):
 @login_required()
 def overview(request):
         return render(request, 'overview.html')
+        #   return render(request, 'leave/sal.html')
 
 
 # my annualdays function  
