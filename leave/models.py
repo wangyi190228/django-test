@@ -20,9 +20,14 @@ class Alapply(models.Model):
 
 class Alinfo(models.Model):
     staffnum = models.PositiveIntegerField()
+    applicant = models.CharField(max_length = 32)
+    aplitime = models.DateTimeField()
     reason = models.TextField()
+    leader = models.CharField(max_length = 32)
+    fapltime = models.DateTimeField()
     fapl = models.BooleanField()
     freason = models.TextField()
+    hr = models.CharField(max_length = 32)
     sapl = models.BooleanField()
     sreason = models.TextField()
 
