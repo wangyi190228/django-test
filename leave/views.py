@@ -1,8 +1,11 @@
+import datetime
+
 from django.shortcuts import render, redirect
 
 # send mail
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
+from .models import staffAl,Alinfo
 
 # Create your views here.
 #my leave pages
@@ -17,22 +20,34 @@ str5 = 'leave/staffleave.html'
 def annual(request):
     if request.method == "POST":
         start = request.POST['start']
+        alstart = request.POST['alstart']
         stop = request.POST['stop']
+        alstop = request.POST['alstop']
         day = request.POST['Daysnum']
+        alreason = request.POST['alreason']
         if  start == '' or stop == '' or day == '0':
             return redirect('/annual/')
         else:
-            # send_mail(
-            #     'Remind',
-            #     'You have a new message',
-            #     '1204534516@qq.com',
-            #     ['yi.wang@afconsult.com'],
-            #     fail_silently=False,
-            # )
-            content = {'start':request.POST['start'],'stop':request.POST['stop'],'Daysnum':request.POST['Daysnum']}
-            return render(request,str2,content)
+            nowTime=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            obj = Alinfo(starttime=(start+alstart),applicant = "w",
+                  stoptime=(stop+alstop),aldays=day, aplitime=nowTime,reason = alreason,status= "submitted")
+            obj.save()
+            send_mail(
+                'New message',
+                'You have a new message',
+                '1204534516@qq.com',
+                ['yi.wang@afconsult.com'],
+                fail_silently=False,
+            )
+        #    datatuple = (
+        #    ('Subject', 'Message.', 'from@example.com', ['john@example.com']),
+        #    ('Subject', 'Message.', 'from@example.com', ['jane@example.com']),
+        #    )
+        #    send_mass_mail(datatuple)
+            return render(request,str2)
     # get method
     return render(request, str1)
+
 
 # my overview function  
 @login_required()
@@ -58,8 +73,11 @@ def staffleave(request):
 # my annuallist application function 
 @login_required()
 def annuallist(request):
+    readlist=[]
     if request.is_ajax():
-        return render(request, str2)
+        # Alinfo.objects.filter()
+        readlist = Alinfo.objects.all()
+        return render(request, str2,{"readlist":readlist})
 
 
 # my approvallist application function 
@@ -79,6 +97,10 @@ def approvallist(request):
                 return render(request,'leave/approvallist.html',content)
         else:
             return render(request,'leave/approvallist.html')
+
+@login_required()
+def detail(request):
+        return render(request, "leave/detail.html")
 
 
 

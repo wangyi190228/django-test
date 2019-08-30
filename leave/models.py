@@ -10,26 +10,20 @@ class staffAl(models.Model):
     remain = models.PositiveSmallIntegerField()
     used = models.PositiveSmallIntegerField()
 
-class Alapply(models.Model):
-    staffnum = models.PositiveIntegerField()
-    alstartdate = models.DateField()
-    starttime = models.CharField(max_length = 10)
-    alstopdate = models.DateField()
-    stoptime = models.CharField(max_length = 10)
-    aldays = models.PositiveSmallIntegerField()
-
 class Alinfo(models.Model):
-    staffnum = models.PositiveIntegerField()
+    starttime = models.CharField(max_length = 50)
+    stoptime = models.CharField(max_length = 50)
+    aldays = models.PositiveSmallIntegerField()
     applicant = models.CharField(max_length = 32)
     aplitime = models.DateTimeField()
     reason = models.TextField()
     leader = models.CharField(max_length = 32)
     fapltime = models.DateTimeField()
-    fapl = models.BooleanField()
     freason = models.TextField()
     hr = models.CharField(max_length = 32)
-    sapl = models.BooleanField()
     sreason = models.TextField()
+    # submitted canceled processed finished
+    status = models.CharField(max_length = 20)
 
 
 

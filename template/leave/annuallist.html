@@ -35,14 +35,17 @@
    {% comment %}
      {% if  %}
    {% endcomment %}
+   {% for index in readlist %}
     <tr>
-        <td>{{item}}</td>
-        <td>{{start}}</td>
-        <td>{{stop}}</td>
-        <td>{{Daysnum}}</td>
-        <td>{{status}}</td>
-        <td><a href="#">detail</a></td>
-    </tr>
+      <td>{{forloop.counter}}</td>
+      <td>{{index.starttime}}</td>
+      <td>{{index.stoptime}}</td>
+      <td>{{index.aldays}}</td>
+      <td>{{index.status}}</td>
+      <td><a href="/detail/">detail</a></td>
+  </tr>
+   {% endfor %}
+
     {% comment %}
       {% endif %}
     {% endcomment %}

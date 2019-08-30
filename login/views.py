@@ -24,6 +24,7 @@ def aflogin(request):
 
 
 # my logout function
+@login_required()
 def aflogout(request):
     logout(request)
     return render(request, 'login/logout.html')
